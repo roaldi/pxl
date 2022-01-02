@@ -65,8 +65,8 @@ func Display(image string) {
 			}
 		case termbox.EventResize:
 			draw(img)
-			//default:
-			//	time.Sleep(1 * time.Nanosecond)
+		default:
+			time.Sleep(1 * time.Nanosecond)
 		}
 	}
 }
