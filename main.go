@@ -1,15 +1,11 @@
-package main
+package pxl
 
 import (
-	"fmt"
+	"github.com/nsf/termbox-go"
 	"image"
-	"os"
-	"time"
-
 	_ "image/jpeg"
 	_ "image/png"
-
-	"github.com/nsf/termbox-go"
+	"time"
 )
 
 func draw(img image.Image) {
@@ -45,7 +41,15 @@ func draw(img image.Image) {
 	termbox.Flush()
 }
 
-func display(image string) {
+func Display(image string) {
+
+	err := termbox.Init()
+	if err != nil {
+		panic(err)
+	}
+	defer termbox.Close()
+	termbox.SetOutputMode(termbox.Output256)
+
 	img, err := load(image)
 	if err != nil {
 		panic(err)
@@ -64,24 +68,5 @@ func display(image string) {
 		default:
 			time.Sleep(10 * time.Millisecond)
 		}
-	}
-}
-
-func main() {
-	if len(os.Args) < 2 {
-		fmt.Printf("Usage: %s <filename>...\n\n", os.Args[0])
-		fmt.Println("Close the image with <ESC> or by pressing 'q'.")
-		os.Exit(1)
-	}
-
-	err := termbox.Init()
-	if err != nil {
-		panic(err)
-	}
-	defer termbox.Close()
-	termbox.SetOutputMode(termbox.Output256)
-
-	for i := 1; i < len(os.Args); i++ {
-		display(os.Args[i])
 	}
 }
