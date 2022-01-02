@@ -60,13 +60,13 @@ func Display(image string) {
 	for {
 		switch ev := termbox.PollEvent(); ev.Type {
 		case termbox.EventKey:
-			if ev.Ch == 'q' {
+			if ev.Ch == 'q' || ev.Key == termbox.KeyEsc {
 				return
 			}
 		case termbox.EventResize:
 			draw(img)
-		default:
-			time.Sleep(10 * time.Millisecond)
+			//default:
+			//	time.Sleep(1 * time.Nanosecond)
 		}
 	}
 }
