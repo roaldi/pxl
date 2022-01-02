@@ -1,4 +1,4 @@
-module pxl
+module github.com/roaldi/pxl
 
 go 1.18
 
