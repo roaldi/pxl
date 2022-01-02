@@ -60,7 +60,7 @@ func Display(image string) {
 	for {
 		switch ev := termbox.PollEvent(); ev.Type {
 		case termbox.EventKey:
-			if ev.Ch == 'q' || ev.Key == termbox.KeyEsc {
+			if ev.Ch == 'q' {
 				return
 			}
 		case termbox.EventResize:
